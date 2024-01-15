@@ -390,6 +390,7 @@ export interface ApiPagePage extends Schema.CollectionType {
       ]
     > &
       Attribute.Required;
+    footer_text: Attribute.Blocks & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
