@@ -1,5 +1,40 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
+export interface MenuMenuLink extends Schema.Component {
+  collectionName: 'components_menu_menu_links';
+  info: {
+    displayName: 'menu_link';
+    icon: 'apps';
+  };
+  attributes: {
+    link_text: Attribute.String & Attribute.Required;
+    url: Attribute.Text & Attribute.Required;
+    open_in_new_tab: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+  };
+}
+
+export interface MenuMenu extends Schema.Component {
+  collectionName: 'components_menu_menus';
+  info: {
+    displayName: 'menu';
+    description: '';
+  };
+  attributes: {
+    logo_link: Attribute.Text & Attribute.Required;
+    logo_text: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 3;
+        maxLength: 255;
+      }>;
+    logo: Attribute.Media;
+    menu_links: Attribute.Component<'menu.menu-link', true> &
+      Attribute.Required;
+  };
+}
+
 export interface SectionImageGrid extends Schema.Component {
   collectionName: 'components_section_image_grids';
   info: {
@@ -99,6 +134,8 @@ export interface SectionTextGrid extends Schema.Component {
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
+      'menu.menu-link': MenuMenuLink;
+      'menu.menu': MenuMenu;
       'section.image-grid': SectionImageGrid;
       'section.section-content': SectionSectionContent;
       'section.section-grid': SectionSectionGrid;
