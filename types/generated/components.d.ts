@@ -1,5 +1,30 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
+export interface SectionImageGrid extends Schema.Component {
+  collectionName: 'components_section_image_grids';
+  info: {
+    displayName: 'image-grid';
+  };
+  attributes: {
+    image: Attribute.Media & Attribute.Required;
+  };
+}
+
+export interface SectionSectionGrid extends Schema.Component {
+  collectionName: 'components_section_section_grids';
+  info: {
+    displayName: 'section_grid';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Text & Attribute.Required;
+    text_grid: Attribute.Component<'section.text-grid', true>;
+    image_grid: Attribute.Component<'section.image-grid', true>;
+    metadata: Attribute.Component<'section.section-metadata'>;
+  };
+}
+
 export interface SectionSectionMetadata extends Schema.Component {
   collectionName: 'components_section_section_metadata';
   info: {
@@ -45,11 +70,26 @@ export interface SectionSectionTwoColumns extends Schema.Component {
   };
 }
 
+export interface SectionTextGrid extends Schema.Component {
+  collectionName: 'components_section_text_grids';
+  info: {
+    displayName: 'text-grid';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Text & Attribute.Required;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
+      'section.image-grid': SectionImageGrid;
+      'section.section-grid': SectionSectionGrid;
       'section.section-metadata': SectionSectionMetadata;
       'section.section-two-columns': SectionSectionTwoColumns;
+      'section.text-grid': SectionTextGrid;
     }
   }
 }
