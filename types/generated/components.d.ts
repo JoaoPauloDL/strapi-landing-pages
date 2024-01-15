@@ -10,6 +10,20 @@ export interface SectionImageGrid extends Schema.Component {
   };
 }
 
+export interface SectionSectionContent extends Schema.Component {
+  collectionName: 'components_section_section_contents';
+  info: {
+    displayName: 'section_content';
+    icon: 'alien';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    content: Attribute.Blocks & Attribute.Required;
+    metadata: Attribute.Component<'section.section-metadata'> &
+      Attribute.Required;
+  };
+}
+
 export interface SectionSectionGrid extends Schema.Component {
   collectionName: 'components_section_section_grids';
   info: {
@@ -86,6 +100,7 @@ declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'section.image-grid': SectionImageGrid;
+      'section.section-content': SectionSectionContent;
       'section.section-grid': SectionSectionGrid;
       'section.section-metadata': SectionSectionMetadata;
       'section.section-two-columns': SectionSectionTwoColumns;
